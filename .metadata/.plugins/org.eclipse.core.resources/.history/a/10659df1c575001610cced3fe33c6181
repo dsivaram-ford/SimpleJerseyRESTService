@@ -1,0 +1,54 @@
+package com.siva.work.webservice.client;
+
+import java.net.URI;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
+
+import org.glassfish.jersey.client.ClientConfig;
+
+
+public class ConversionServiceClient {
+	 static final String REST_URI = "http://localhost:8080/RESTfulWebServiceExample";
+	 static final String INCH_TO_FEET = "/ConversionService/InchToFeet/";
+	 static final String FEET_TO_INCH = "/ConversionService/FeetToInch/";
+	 
+	 public static void main(String[] args) {
+
+		 int inch=12;
+		 int feet=2;
+
+		 ClientConfig config = new ClientConfig();
+		 Client client = ClientBuilder.newClient(config);
+		 WebTarget target = client.target(getBaseURI());
+		 
+		 String xmlResponse = target.path("rest").path(INCH_TO_FEET+inch).request().accept(MediaType.TEXT_XML).get(String.class);
+		 System.out.println();
+		 
+		  // Get XML for application
+		    String xmlAppResponse =target.path("rest").path(INCH_TO_FEET+inch).request()
+		        .accept(MediaType.APPLICATION_XML).get(String.class);
+		    
+		    System.out.println(xmlResponse);
+		    System.out.println(xmlAppResponse);
+
+/*		 WebResource addService = service.path("rest").path(INCH_TO_FEET+inch);
+		 System.out.println("INCH_TO_FEET Response: " + getResponse(addService));
+		 System.out.println("INCH_TO_FEET Output as XML: " + getOutputAsXML(addService));
+		 System.out.println("---------------------------------------------------");
+
+		 WebResource subService = service.path("rest").path(FEET_TO_INCH+feet);
+		 System.out.println("FEET_TO_INCH Response: " + getResponse(subService));
+		 System.out.println("FEET_TO_INCH Output as XML: " + getOutputAsXML(subService));
+		 System.out.println("---------------------------------------------------");*/
+
+		 }
+	 
+	 private static URI getBaseURI() {
+		    return UriBuilder.fromUri("http://localhost:8080/RESTfulWebServiceExample").build();
+		  }
+}

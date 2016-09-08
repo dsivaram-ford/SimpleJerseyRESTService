@@ -1,0 +1,10 @@
+package com.siva.work.webservice.client;
+
+import javax.ws.rs.Path;
+
+
+public class ConversionServiceClient {
+	 static final String REST_URI = "http://localhost:8080/RESTfulWebServiceExample";
+	 static final String INCH_TO_FEET = "/ConversionService/InchToFeet/";
+	 static final String FEET_TO_INCH = "/ConversionService/FeetToInch/";
+}
